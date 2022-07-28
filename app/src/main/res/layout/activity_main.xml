@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- necessary for the TabLayout -->
+<!-- Use DrawerLayout as root container for activity -->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+
+
+    <!-- necessary for the TabLayout -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <!--Définir la toolbar comme Barre d’Action-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/activity_main_tabs"
@@ -16,7 +37,7 @@
         app:tabTextColor="#D4E0F8"
         app:tabSelectedTextColor="#fff"/>
 
-<!-- activity_screen_slide.xml -->
+<!-- ViewPager2 screen slide -->
 <androidx.viewpager2.widget.ViewPager2
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main_viewpager"
@@ -25,3 +46,15 @@
 
 
     </LinearLayout>
+
+    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/activity_main_nav_header"
+        app:menu="@menu/activity_main_menu_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
